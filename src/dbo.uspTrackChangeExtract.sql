@@ -12,7 +12,7 @@ BEGIN
 	CREATE TABLE #PKVals (PKVal1 varchar(500), PKVal2 varchar(500), PKVal3 varchar(500))
 
 	DECLARE cur cursor for
-		SELECT SchemaName, TableName FROM dbo.TrackChangeTable WHERE TrackChanges = 1
+		SELECT SchemaName, TableName FROM dbo.TrackChangeConfig WHERE TrackChanges = 1
 	open cur
 	fetch next from cur into @Schema, @Table
 	while @@FETCH_STATUS = 0 begin
@@ -119,6 +119,6 @@ END
 GO
 /*
 
-select * from TrackChangeTable
+select * from TrackChangeConfig
 
 */
