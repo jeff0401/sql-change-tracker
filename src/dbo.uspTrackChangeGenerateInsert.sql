@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspChangeTrackGenerateInsert]
+CREATE PROCEDURE [dbo].[uspTrackChangeGenerateInsert]
 (
   @ObjectName nvarchar(261)
 , @TargetObjectName nvarchar(261) = NULL
