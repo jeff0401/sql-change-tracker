@@ -6,7 +6,7 @@ BEGIN
 	SET @DB = db_name()
 
 	DECLARE cur CURSOR FOR
-		SELECT SchemaName, TableName FROM dbo.TrackChangeTable WHERE TrackChanges = 1
+		SELECT SchemaName, TableName FROM dbo.TrackChangeConfig WHERE TrackChanges = 1
 	OPEN cur
 	FETCH NEXT FROM cur INTO @schema, @table
 	WHILE @@FETCH_STATUS = 0 BEGIN
