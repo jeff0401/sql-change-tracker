@@ -1,4 +1,4 @@
-# sql-change-tracker
+# sql-track-change
 A SQL-only solution to track and extract DML changes to a database
 
 ####Use Case
