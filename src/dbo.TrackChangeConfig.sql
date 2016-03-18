@@ -19,3 +19,4 @@ SELECT s.name, t.name, CASE WHEN c.column_id IS NULL THEN NULL ELSE 1000 END
 FROM sys.tables t INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
 LEFT OUTER JOIN sys.identity_columns c ON t.object_id = c.object_id
 GO
+
