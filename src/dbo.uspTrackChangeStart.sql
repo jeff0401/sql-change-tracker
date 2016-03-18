@@ -9,7 +9,7 @@ BEGIN
 	EXEC('ALTER DATABASE [' + @DB + '] SET CHANGE_TRACKING = ON (CHANGE_RETENTION = 365 DAYS, AUTO_CLEANUP = ON);')
 	
 	DECLARE cur CURSOR FOR
-		SELECT SchemaName, TableName FROM dbo.TrackChangeTable WHERE TrackChanges = 1
+		SELECT SchemaName, TableName FROM dbo.TrackChangeConfig WHERE TrackChanges = 1
 	OPEN cur
 	FETCH NEXT FROM cur INTO @schema, @table
 	WHILE @@FETCH_STATUS = 0 BEGIN
