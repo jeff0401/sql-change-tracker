@@ -1,4 +1,12 @@
-CREATE PROCEDURE dbo.uspTrackChangeExtract
+IF EXISTS ( SELECT * 
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[uspTrackChangeExtract]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[uspTrackChangeExtract]
+END
+GO
+CREATE PROCEDURE [dbo].[uspTrackChangeExtract]
 AS
 BEGIN
 	SET NOCOUNT ON
@@ -47,56 +55,46 @@ BEGIN
 		  FOR KeyPart IN (PK1, PK2, PK3)
 		) piv
 
-		print @PK1
-		if @PK2 is null
-			print 'null'
-		else
-			print @PK2
-		if @PK3 is null
-			print 'null'
-		else
-			print @PK3
-
-		/*
+		
 		DELETE FROM #PKVals
-		set @SQL = 'insert into #PKVals (PKVal1, PKVal2) select ' + @PK1 + ', '
-		if @PK2 is null begin
-			-- dummy field
-			set @SQL = @SQL + '1'
-		end else begin 
-			set @SQL = @SQL + @PK2
-		end
+		set @SQL = 'insert into #PKVals (PKVal1, PKVal2, PKVal3) select ' + @PK1 + ', ' + COALESCE(@PK2, '1') + ', ' + COALESCE(@PK3, '1')
 		set @SQL = @SQL + ' FROM CHANGETABLE(CHANGES ' + @FullTable + ', 0) AS CT'
 		--print @SQL
 		exec(@SQL)
 	
+	
 		if exists (select top 1 * from #PKVals) begin
 			DECLARE change cursor for 
-				select PKVal1, PKVal2 from #PKVals
+				select PKVal1, PKVal2, PKVal3 from #PKVals
 			open change
-			fetch next from change into @PK1Val, @PK2Val
+			fetch next from change into @PK1Val, @PK2Val, @PK3Val
 			while @@FETCH_STATUS = 0 begin
 				--write delete statement
 				set @SQL = 'DELETE FROM ' + @FullTable + ' WHERE ' + @PK1 + ' = ''' + @PK1Val + ''''
 				if @PK2 is not null begin
 					set @SQL = @SQL + ' AND ' + @PK2 + ' = ''' + @PK2Val + ''''
 				end
+				if @PK3 is not null begin
+					set @SQL = @SQL + ' AND ' + @PK3 + ' = ''' + @PK3Val + ''''
+				end
 				print @SQL
-				fetch next from change into @PK1Val, @PK2Val
+				fetch next from change into @PK1Val, @PK2Val, @PK3Val
 			end
 			close change
 			deallocate change
 
 			-- generate inserts
-			if @PK2 is null begin
-				set @SearchCondition = @PK1 + ' IN (SELECT ' + @PK1 + ' FROM CHANGETABLE(CHANGES ' + @FullTable + ', 0) AS CT)'
-			end else begin
+			if @PK3 is not null begin
+				set @SearchCondition = 'EXISTS (SELECT * FROM CHANGETABLE(CHANGES ' + @FullTable + ', 0) AS CT WHERE ' + @FullTable + '.' + @PK1 + ' = CT.' + @PK1 + ' AND ' + @FullTable + '.' + @PK2 + ' = CT.' + @PK2 + ' AND ' + @FullTable + '.' + @PK3 + ' = CT.' + @PK3 + ')'
+			end else if @PK2 is not null begin
 				set @SearchCondition = 'EXISTS (SELECT * FROM CHANGETABLE(CHANGES ' + @FullTable + ', 0) AS CT WHERE ' + @FullTable + '.' + @PK1 + ' = CT.' + @PK1 + ' AND ' + @FullTable + '.' + @PK2 + ' = CT.' + @PK2 + ')'
+			end else begin
+				set @SearchCondition = @PK1 + ' IN (SELECT ' + @PK1 + ' FROM CHANGETABLE(CHANGES ' + @FullTable + ', 0) AS CT)'
 			end
-			--print @SearchCondition
+			print @SearchCondition
 
 		
-			exec Utility.uspGenerateInsert 
+			exec uspTrackChangeGenerateInsert
 				@ObjectName = @FullTable,
 				@GenerateSingleInsertPerRow = 1, 
 				@GenerateProjectInfo = 0,
@@ -107,7 +105,7 @@ BEGIN
 
 			
 		end
-		*/
+		
 		fetch next from cur into @Schema, @Table
 	end
 	close cur
@@ -117,8 +115,3 @@ BEGIN
 	
 END
 GO
-/*
-
-select * from TrackChangeConfig
-
-*/

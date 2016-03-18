@@ -1,3 +1,11 @@
+IF EXISTS ( SELECT * 
+            FROM   sysobjects 
+            WHERE  id = object_id(N'[dbo].[uspTrackChangeGenerateInsert]') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [dbo].[uspTrackChangeGenerateInsert]
+END
+GO
 CREATE PROCEDURE [dbo].[uspTrackChangeGenerateInsert]
 (
   @ObjectName nvarchar(261)
@@ -476,3 +484,4 @@ END
 
 END
 
+GO
