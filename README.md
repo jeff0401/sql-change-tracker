@@ -10,7 +10,7 @@ This solution uses a table and several stored procedures to allow configuration 
 ####Usage
 
 ######Installation
-Execute the Install.sql script to create the table and stored procedures.  The configuration table (_dbo.TrackChangeConfig_) will be prepopulated with all tables from the database.
+Execute the _Install.sql_ script to create the table and stored procedures.  The configuration table (_dbo.TrackChangeConfig_) will be prepopulated with all tables from the database.
 
 ######Configuration
 Configuration is stored in the _dbo.TrackChangeConfig table_.  Tracking is an opt-in operation.  Set the _TrackChanges_ field to 1 for each table to track.  If the table contains an identity column, you can set the _IdentityIncrement_ field.  If set, the table will be reseeded to the current value plus this increment when tracking is started.  This option creates a buffer between the records configured in the source database and the records in the target database.  This is to avoid Id conflicts when the script is executed in the target database. 
@@ -22,7 +22,13 @@ Execute the _dbo.uspTrackChangeStart_ stored procedure.  This will turn on chang
 At this point, make necessary changes to the database data.  SQL Server Change Tracking will keep track of all changes automatically.
 
 ######Generate Scripts
-After changes are completed, execute the _dbo.uspTrackChangeExtract_ stored procedure.  This will generate delete/insert statements to propagate all stored changes to the target database.
+After changes are completed, execute the _dbo.uspTrackChangeExtract_ stored procedure.  This will generate delete/insert statements needed to propagate all stored changes to the target database.
+
+######Stop Tracking
+Execute the _dbo.uspTrackChangeStop_ stored procedure to stop tracking on all tables and the database.
+
+######Uninstall
+Execute the _Uninstall.sql_ script to remove the table and stored procedures from the database.
 
 #### Roadmap
 
