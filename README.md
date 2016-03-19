@@ -30,6 +30,10 @@ Execute the _dbo.uspTrackChangeStop_ stored procedure to stop tracking on all ta
 ######Uninstall
 Execute the _Uninstall.sql_ script to remove the table and stored procedures from the database.
 
+#### Limitations
+1. A table must have a primary key for its data to be tracked
+2. This tool only supports composite primary keys with three or less columns
+
 #### Roadmap
 
 Feature                                                                     | State
