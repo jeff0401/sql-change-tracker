@@ -42,3 +42,6 @@ Initial release                                                             | âœ
 Make delete statements type correct                                         | v2.0
 Enhance start proc to only operate on new tables                            | v2.0
 Make the retention period configurable                                      | v2.0
+
+
+http://jeffreypolk.github.io/sql-track-change/
