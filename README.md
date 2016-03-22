@@ -39,9 +39,7 @@ Execute the _Uninstall.sql_ script to remove the table and stored procedures fro
 Feature                                                                     | State
 --------------------------------------------------------------------------- | :------------:
 Initial release                                                             | ✓
-Make delete statements type correct                                         | v2.0
-Enhance start proc to only operate on new tables                            | v2.0
-Make the retention period configurable                                      | v2.0
+Make delete statements type correct                                         | ✓
+Enhance start proc to only operate on new tables                            | ✓
+Make the retention period configurable                                      | v3.0
 
-
-http://jeffreypolk.github.io/sql-track-change/
