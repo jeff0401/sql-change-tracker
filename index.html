@@ -79,7 +79,7 @@
                     <p>
                         Configuration is stored in the <span class="code">dbo.TrackChangeConfig</span> table. Tracking is an opt-in operation.
                         Set the TrackChanges column to 1 for each table to track. If the table contains an identity column,
-                        you can set the IdentityIncrement field. If set, the table will be reseeded to the
+                        you can set the IdentityIncrement column. If set, the table will be reseeded to the
                         current value plus this increment when tracking is started. This option creates a buffer
                         between the records in the source database and the records in the target database.
                         This is to avoid Id conflicts when the script is executed in the target database.
@@ -93,13 +93,14 @@
                         Begin Tracking
                     </h3>
                     <p>
-                        Execute the <span class="code">dbo.uspTrackChangeStart stored procedure</span> This will turn on change tracking at
-                        the database level and enable tracking on each table configured for tracking.
-                        If a table has an IdentityIncrement value, the table will be reseeded.
-                        SQL Server Change Tracking is set to retain changes for 365 days.
+                        Execute the <span class="code">dbo.uspTrackChangeStart</span> stored procedure. 
+                        This will turn on change tracking at the database level and enable tracking 
+                        on each table configured for tracking.  If a table has an IdentityIncrement value, 
+                        the table will be reseeded.  SQL Server Change Tracking is set to retain changes for 365 days.
                     </p>
                     <p>
-                        something else
+                        The tables modified/tracked in the source should be locked down in the target.  If changes occurred 
+                        in target between track change start and extract in source, then results are 
                     </p>
                 </div>
 
