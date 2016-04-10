@@ -43,7 +43,7 @@
                     </p>
                 </div>
 
-                <!-- Initialization -->
+                <!-- Implementation -->
                 <div>
                     <h3>
                         <a id="Implementation" class="anchor" href="#Implementation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
@@ -64,38 +64,64 @@
                         Usage
                     </h3>
                     <p>
-                        The <span class="code">Execute</span> method has numerous overloads and returns different types of data based on 
-                        the passed return parameter.
+                        This is how you use this awesome tool
                     </p>
-                    <script src="https://gist.github.com/jeffreypolk/fa83100f47fada8b751d.js"></script>
 
-                </div>
-
-                <!-- Parameters -->
-                <div>
-                    <h3>
-                        <a id="Parameters" class="anchor" href="#Parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
-                        Parameters
-                    </h3>
+                    <!-- Installation -->
+                    <h4>Installation</h4>
                     <p>
-                        Parameters are set using the <span class="code">Parameters.AddWithValue</span> method.
+                        Execute the Install.sql script to create the table and stored procedures. The configuration 
+                        table <span class="code">dbo.TrackChangeConfig</span> will be prepopulated with all tables from the database.
                     </p>
-                    <script src="https://gist.github.com/jeffreypolk/4f1287dfd9020abf8f80.js"></script>
+                    
+                    <!-- Configuration-->
+                    <h4>Configuration</h4>
+                    <p>
+                        Configuration is stored in the dbo.TrackChangeConfig table. Tracking is an opt-in operation. 
+                        Set the TrackChanges field to 1 for each table to track. If the table contains an identity column, 
+                        you can set the IdentityIncrement field. If set, the table will be reseeded to the 
+                        current value plus this increment when tracking is started. This option creates a buffer 
+                        between the records configured in the source database and the records in the target database. 
+                        This is to avoid Id conflicts when the script is executed in the target database.
+                    </p>
+                    
+                    <!-- Begin Tracking -->
+                    <h4>Begin Tracking</h4>
+                    <p>
+                        Execute the dbo.uspTrackChangeStart stored procedure. This will turn on change tracking at 
+                        the database level and enable tracking on each table configured for tracking. 
+                        If a table has an IdentityIncrement value, the table will be reseeded. 
+                        SQL Server Change Tracking is set to retain changes for 365 days.
+                    </p>
+
+                    <!-- Make Changes -->
+                    <h4>Make Changes</h4>
+                    <p>
+                        Set it and forget it. SQL Server Change Tracking will keep track of all the changes automatically.
+                    </p>
+
+                    <!-- Generate Scripts -->
+                    <h4>Generation Scripts</h4>
+                    <p>
+                        After changes are completed or at a checkpoint, execute the dbo.uspTrackChangeExtract stored procedure. 
+                        This will generate delete/insert statements needed to propagate all stored changes to the target database. 
+                        This procedure always begins with the changes made since the dbo.uspTrackChangeStart procedure was called.
+                    </p>
+
+                    <!-- Stop Tracking -->
+                    <h4>Stop Tracking</h4>
+                    <p>
+                        Execute the dbo.uspTrackChangeStop stored procedure to stop tracking on all tables and the database.
+                    </p>
+
+                    <!-- Uninstall -->
+                    <h4>Uninstall</h4>
+                    <p>
+                        Execute the Uninstall.sql script to remove the table and stored procedures from the database.
+                    </p>
+
                 </div>
 
-                <!-- Transactions -->
-                <div>
-                    <h3>
-                        <a id="Transactions" class="anchor" href="#Transactions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
-                        Transaction Handling
-                    </h3>
-                    <p>
-                        A transaction is managed by calling the <span class="code">BeginTransaction</span> method.  All subsequent 
-                        <span class="code">Execute</span> calls are included as part of that transaction. End the transaction
-                        by calling the <span class="code">CommitTransaction</span> method or the <span class="code">RollbackTransaction</span> method.
-                    </p>
-                    <script src="https://gist.github.com/jeffreypolk/3339f8316ed7393b7bce.js"></script>
-                </div>
 
             </section>
 
