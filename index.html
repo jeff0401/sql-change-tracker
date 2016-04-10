@@ -95,12 +95,12 @@
                     <p>
                         Execute the <span class="code">dbo.uspTrackChangeStart</span> stored procedure. 
                         This will turn on change tracking at the database level and enable tracking 
-                        on each table configured for tracking.  If a table has an IdentityIncrement value, 
+                        on each table configured for tracking.  If a table has an <span class="code">IdentityIncrement</span> value, 
                         the table will be reseeded.  SQL Server Change Tracking is set to retain changes for 365 days.
                     </p>
                     <p>
-                        The tables modified/tracked in the source should be locked down in the target.  If changes occurred 
-                        in target between track change start and extract in source, then results are 
+                        The tables modified/tracked in the source should be locked down in the target.  If changes are made 
+                        in the target between track change start and extract in the source, then data intregrity in the target is at risk.
                     </p>
                 </div>
 
