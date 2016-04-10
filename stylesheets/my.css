@@ -2,3 +2,13 @@
     font-family:'Courier New';
     font-style:normal;
 }
+
+.feature-name {
+    text-align:left;
+}
+
+th {
+    background-color:#2E7BCF;
+    color:#FFFFFF;
+    font-weight:bold;
+}
