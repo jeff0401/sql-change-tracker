@@ -29,6 +29,7 @@
     <div id="content-wrapper">
         <div class="inner clearfix">
             <section id="main-content">
+
                 <!-- Overview -->
                 <div>
                     <h3>
@@ -57,73 +58,96 @@
                     </p>
                 </div>
 
-                <!-- Usage -->
+                <!-- Installation -->
                 <div>
                     <h3>
-                        <a id="Usage" class="anchor" href="#Usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
-                        Usage
+                        <a id="Installation" class="anchor" href="#Installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Installation
                     </h3>
                     <p>
-                        This is how you use this awesome tool
-                    </p>
-
-                    <!-- Installation -->
-                    <h4>Installation</h4>
-                    <p>
-                        Execute the Install.sql script to create the table and stored procedures. The configuration 
+                        Execute the Install.sql script to create the table and stored procedures. The configuration
                         table <span class="code">dbo.TrackChangeConfig</span> will be prepopulated with all tables from the database.
                     </p>
-                    
-                    <!-- Configuration-->
-                    <h4>Configuration</h4>
+                </div>
+
+                <!-- Configuration -->
+                <div>
+                    <h3>
+                        <a id="Configuration" class="anchor" href="#Configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Configuration
+                    </h3>
                     <p>
-                        Configuration is stored in the dbo.TrackChangeConfig table. Tracking is an opt-in operation. 
-                        Set the TrackChanges field to 1 for each table to track. If the table contains an identity column, 
-                        you can set the IdentityIncrement field. If set, the table will be reseeded to the 
-                        current value plus this increment when tracking is started. This option creates a buffer 
-                        between the records configured in the source database and the records in the target database. 
+                        Configuration is stored in the dbo.TrackChangeConfig table. Tracking is an opt-in operation.
+                        Set the TrackChanges field to 1 for each table to track. If the table contains an identity column,
+                        you can set the IdentityIncrement field. If set, the table will be reseeded to the
+                        current value plus this increment when tracking is started. This option creates a buffer
+                        between the records configured in the source database and the records in the target database.
                         This is to avoid Id conflicts when the script is executed in the target database.
                     </p>
-                    
-                    <!-- Begin Tracking -->
-                    <h4>Begin Tracking</h4>
+                </div>
+
+                <!-- Begin Tracking -->
+                <div>
+                    <h3>
+                        <a id="BeginTracking" class="anchor" href="#BeginTracking" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Begin Tracking
+                    </h3>
                     <p>
-                        Execute the dbo.uspTrackChangeStart stored procedure. This will turn on change tracking at 
-                        the database level and enable tracking on each table configured for tracking. 
-                        If a table has an IdentityIncrement value, the table will be reseeded. 
+                        Execute the dbo.uspTrackChangeStart stored procedure. This will turn on change tracking at
+                        the database level and enable tracking on each table configured for tracking.
+                        If a table has an IdentityIncrement value, the table will be reseeded.
                         SQL Server Change Tracking is set to retain changes for 365 days.
                     </p>
+                </div>
 
-                    <!-- Make Changes -->
-                    <h4>Make Changes</h4>
+                <!-- Make Changes -->
+                <div>
+                    <h3>
+                        <a id="MakeChanges" class="anchor" href="#MakeChanges" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Make Changes
+                    </h3>
                     <p>
                         Set it and forget it. SQL Server Change Tracking will keep track of all the changes automatically.
                     </p>
+                </div>
 
-                    <!-- Generate Scripts -->
-                    <h4>Generation Scripts</h4>
+                <!-- Generation Scripts -->
+                <div>
+                    <h3>
+                        <a id="GenerationScripts" class="anchor" href="#GenerateScripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Generate Scripts
+                    </h3>
                     <p>
-                        After changes are completed or at a checkpoint, execute the dbo.uspTrackChangeExtract stored procedure. 
-                        This will generate delete/insert statements needed to propagate all stored changes to the target database. 
+                        After changes are completed or at a checkpoint, execute the dbo.uspTrackChangeExtract stored procedure.
+                        This will generate delete/insert statements needed to propagate all stored changes to the target database.
                         This procedure always begins with the changes made since the dbo.uspTrackChangeStart procedure was called.
                     </p>
+                </div>
 
-                    <!-- Stop Tracking -->
-                    <h4>Stop Tracking</h4>
+                <!-- Stop Tracking -->
+                <div>
+                    <h3>
+                        <a id="StopTracking" class="anchor" href="#StopTracking" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Stop Tracking
+                    </h3>
                     <p>
                         Execute the dbo.uspTrackChangeStop stored procedure to stop tracking on all tables and the database.
                     </p>
+                </div>
 
-                    <!-- Uninstall -->
-                    <h4>Uninstall</h4>
+                <!-- Uninstall -->
+                <div>
+                    <h3>
+                        <a id="Uninstall" class="anchor" href="#Uninstall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+                        Uninstall
+                    </h3>
                     <p>
                         Execute the Uninstall.sql script to remove the table and stored procedures from the database.
                     </p>
 
                 </div>
 
-
-            </section>
+        </section>
 
             <aside id="sidebar">
                 <a href="https://github.com/jeffreypolk/sql-track-change/zipball/master" class="button">
@@ -138,7 +162,7 @@
                 <p class="repo-owner"><a href="https://github.com/jeffreypolk/sql-track-change"></a> is maintained by <a href="https://github.com/jeffreypolk">jeffreypolk</a>.</p>
 
                 <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-            </aside>
+        </aside>
         </div>
     </div>
 
