@@ -65,7 +65,7 @@
                         Installation
                     </h3>
                     <p>
-                        Execute the Install.sql script to create the table and stored procedures. The configuration
+                        Execute the <span class="code">Install.sql</span> script to create the table and stored procedures. The configuration
                         table <span class="code">dbo.TrackChangeConfig</span> will be prepopulated with all tables from the database.
                     </p>
                 </div>
@@ -77,11 +77,11 @@
                         Configuration
                     </h3>
                     <p>
-                        Configuration is stored in the dbo.TrackChangeConfig table. Tracking is an opt-in operation.
-                        Set the TrackChanges field to 1 for each table to track. If the table contains an identity column,
+                        Configuration is stored in the <span class="code">dbo.TrackChangeConfig</span> table. Tracking is an opt-in operation.
+                        Set the TrackChanges column to 1 for each table to track. If the table contains an identity column,
                         you can set the IdentityIncrement field. If set, the table will be reseeded to the
                         current value plus this increment when tracking is started. This option creates a buffer
-                        between the records configured in the source database and the records in the target database.
+                        between the records in the source database and the records in the target database.
                         This is to avoid Id conflicts when the script is executed in the target database.
                     </p>
                 </div>
@@ -93,7 +93,7 @@
                         Begin Tracking
                     </h3>
                     <p>
-                        Execute the dbo.uspTrackChangeStart stored procedure. This will turn on change tracking at
+                        Execute the <span class="code">dbo.uspTrackChangeStart stored procedure</span> This will turn on change tracking at
                         the database level and enable tracking on each table configured for tracking.
                         If a table has an IdentityIncrement value, the table will be reseeded.
                         SQL Server Change Tracking is set to retain changes for 365 days.
@@ -118,9 +118,9 @@
                         Generate Scripts
                     </h3>
                     <p>
-                        After changes are completed or at a checkpoint, execute the dbo.uspTrackChangeExtract stored procedure.
+                        After changes are completed or at a checkpoint, execute the <span class="code">dbo.uspTrackChangeExtract</span> stored procedure.
                         This will generate delete/insert statements needed to propagate all stored changes to the target database.
-                        This procedure always begins with the changes made since the dbo.uspTrackChangeStart procedure was called.
+                        This procedure always begins with the changes made since the <span class="code">dbo.uspTrackChangeStart</span> procedure was called.
                     </p>
                 </div>
 
@@ -131,7 +131,7 @@
                         Stop Tracking
                     </h3>
                     <p>
-                        Execute the dbo.uspTrackChangeStop stored procedure to stop tracking on all tables and the database.
+                        Execute the <span class="code">dbo.uspTrackChangeStop</span> stored procedure to stop tracking on all tables and the database.
                     </p>
                 </div>
 
@@ -142,7 +142,7 @@
                         Uninstall
                     </h3>
                     <p>
-                        Execute the Uninstall.sql script to remove the table and stored procedures from the database.
+                        Execute the <span class="code">Uninstall.sql</span> script to remove the table and stored procedures from the database.
                     </p>
 
                 </div>
